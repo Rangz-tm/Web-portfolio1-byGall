@@ -74,7 +74,7 @@ nav ul li a:hover::after{width:100%;left:0}
 
 .hero-right img{min-width:320px;max-width:420px;animation:float 6s ease-in-out infinite}
 @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-12px)}100%{transform:translateY(0)}}
-
+/* ===== SERVICES ===== */
 /* ===== SERVICES ===== */
 .services-background{background:linear-gradient(-45deg,#0f0f23,#1a1a40,#2c2c6c,#0f0f23);background-size:400% 400%;animation:bgFlow 15s ease infinite}
 @keyframes bgFlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
@@ -82,6 +82,10 @@ nav ul li a:hover::after{width:100%;left:0}
 .section-tittle.services-tittle{color:#fff;text-shadow:0 0 4px #fff;position:relative}
 .section-tittle.services-tittle::after{content:'';position:absolute;left:50%;bottom:-8px;width:60%;height:4px;background:linear-gradient(90deg,var(--accent1),var(--accent2));border-radius:4px;transform:translateX(-50%);animation:pulseGlow 2s ease-in-out infinite}
 @keyframes pulseGlow{0%,100%{box-shadow:0 0 0 0 rgba(99,102,241,.5)}50%{box-shadow:0 0 0 12px rgba(99,102,241,0)}}
+
+/* === TAMBAHAN: LINK KARTU SERVICE === */
+.service-link{display:block;text-decoration:none;cursor:pointer;color:inherit}
+.service-link .service{height:100%}
 
 .service{padding:3rem 2rem;text-align:center;border-radius:var(--br);position:relative;overflow:hidden}
 .service-background{background:rgba(0,0,0,.35);border:1px solid var(--accent1);box-shadow:0 0 6px var(--accent1),0 0 12px var(--accent1),0 0 20px var(--accent1);transition:.4s}
@@ -100,36 +104,80 @@ nav ul li a:hover::after{width:100%;left:0}
 @keyframes revealUp{to{opacity:1;transform:translateY(0)}}
 .service:hover h4,.service:hover p{text-shadow:0 0 4px #fff,0 0 8px var(--cyan)}
 
+/* === TAMBAHAN: TOMBOL "VIEW ..." SAAT HOVER === */
+.service-view{
+  display:inline-block;
+  margin-top:1rem;
+  padding:.4rem 1.2rem;
+  font-size:.8rem;
+  font-weight:600;
+  color:var(--accent1);
+  border:1px solid var(--accent1);
+  border-radius:50px;
+  opacity:0;
+  transform:translateY(10px);
+  transition:.3s;
+}
+.service-link:hover .service-view{
+  opacity:1;
+  transform:translateY(0);
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));
+  color:#fff;
+  box-shadow:0 0 10px var(--accent2);
+}
+
 .service::before,.service::after{content:'';position:absolute;width:6px;height:6px;border-radius:50%;background:var(--accent1);opacity:.6;filter:blur(1px);animation:float 8s ease-in-out infinite}
 .service::before{top:20%;left:15%;animation-delay:-2s}
 .service::after{bottom:20%;right:15%;animation-delay:-5s}
-
 /* ===== PORTFOLIO ===== */
-#portfolios{background:linear-gradient(-45deg,#0d1117,#161b22,#21262d,#0d1117);background-size:400% 400%;animation:gradientFlow 8s ease infinite}
+#portfolios{background:linear-gradient(-45deg,#0d1117,#161b22,#21262d,#0d1117);background-size:400% 400%;animation:gradientFlow 8s ease infinite;padding-bottom:4rem}
 @keyframes gradientFlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
-.portfolio{border-radius:1rem;overflow:hidden;background:rgba(22,27,34,.6);border:1px solid rgba(255,255,255,.08);box-shadow:0 8px 24px rgba(0,0,0,.4);transition:.4s;opacity:0;transform:translateY(30px);animation:revealUp .6s forwards}
+.portfolio{border-radius:1rem;overflow:hidden;background:rgba(22,27,34,.6);border:1px solid rgba(255,255,255,.08);box-shadow:0 8px 24px rgba(0,0,0,.4);transition:.4s;opacity:0;transform:translateY(30px);animation:revealUp .6s forwards;position:relative;display:flex;flex-direction:column}
 .portfolio:nth-child(1){animation-delay:.2s}
 .portfolio:nth-child(2){animation-delay:.4s}
 .portfolio:nth-child(3){animation-delay:.6s}
 
-.portfolio::before{content:'';position:absolute;inset:0;opacity:0;background:linear-gradient(135deg,var(--accent1),var(--accent2));transition:.4s}
+.portfolio::before{content:'';position:absolute;inset:0;opacity:0;background:linear-gradient(135deg,var(--accent1),var(--accent2));transition:.4s;z-index:1;pointer-events:none}
 .portfolio:hover{transform:translateY(-10px) scale(1.03);box-shadow:0 20px 40px rgba(255,110,199,.35)}
 .portfolio:hover::before{opacity:.25}
 
+.portfolio-cover{position:relative;overflow:hidden}
 .portfolio-cover img{width:100%;height:250px;object-fit:cover;transition:.6s}
 .portfolio:hover .portfolio-cover img{transform:scale(1.15)}
 
-.portfolio-info{padding:2rem 1.5rem;background:rgba(18,18,18,.85);position:relative;z-index:2}
+/* === TAMBAHAN: TOMBOL CINEMATIC SAAT HOVER === */
+.portfolio-cover::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(99,102,241,.55),rgba(236,72,153,.55));opacity:0;transition:.4s;pointer-events:none}
+.portfolio:hover .portfolio-cover::after{opacity:1}
+.portfolio-view{
+  position:absolute;top:50%;left:50%;z-index:2;
+  transform:translate(-50%,-50%) scale(.7);
+  padding:.6rem 1.6rem;
+  font-size:.85rem;font-weight:600;white-space:nowrap;
+  color:#fff;background:rgba(0,0,0,.45);
+  border:1px solid #fff;border-radius:50px;
+  backdrop-filter:blur(4px);
+  opacity:0;transition:.35s;
+  pointer-events:none;
+}
+.portfolio:hover .portfolio-view{
+  opacity:1;
+  transform:translate(-50%,-50%) scale(1);
+  box-shadow:0 0 15px rgba(255,110,199,.8),0 0 30px rgba(99,102,241,.5);
+}
+
+.portfolio-info{padding:2rem 1.5rem;background:rgba(18,18,18,.85);position:relative;z-index:2;flex:1;display:flex;flex-direction:column}
+.portfolio-info p{flex:1}
 
 .portfolio-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
 .portfolio-title h4{font-size:1.3rem;font-weight:700;background:linear-gradient(135deg,#ff6ec7,#00bcd4);-webkit-background-clip:text;color:transparent}
 
+.portfolio-link{display:inline-flex;transition:.3s}
 .portfolio-link svg{width:20px;height:20px;fill:#ff6ec7;transition:.3s}
 .portfolio-link:hover svg{fill:#00bcd4;transform:translateX(4px) scale(1.15)}
 
-.portfolio-tags{display:flex;gap:.5rem;margin-bottom:.8rem}
-.portfolio-tags div{padding:.35rem .9rem;font-size:.75rem;background:rgba(255,110,199,.15);border-radius:999px}
+.portfolio-tags{display:flex;gap:.5rem;margin-bottom:.8rem;flex-wrap:wrap}
+.portfolio-tags div{padding:.35rem .9rem;font-size:.75rem;background:rgba(255,110,199,.15);border-radius:999px;color:#ffb3dd}
 
 #portfolios .pre-tittle,#portfolios .section-tittle{color:#fff;position:relative;animation:fadeInUpTitle .8s ease forwards}
 @keyframes fadeInUpTitle{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
