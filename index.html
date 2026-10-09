@@ -300,17 +300,11 @@
 </section>  
 <!-- End of Skills and Education -->  
 
- <!-- contact -->
+<!-- contact -->
 <section id="contact">
   <div class="contact main-container">
     <div class="contact-left">
-      <form class="contact-form" action="https://formsubmit.co/ranggahalla3@gmail.com   " method="POST">
-        <!-- Input Hidden untuk Subject dan Redirect -->
-        <input type="hidden" name="_subject" value="Pesan Baru dari Portfolio!">
-        <input type="hidden" name="_next" value="https://websiteportfolioanda.com/terima-kasih.html   ">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_autoresponse" value="Terima kasih telah menghubungi saya! Saya akan segera membalas pesan Anda.">
-
+      <form class="contact-form" id="contact-form">
         <!-- Input Form -->
         <div>
           <input type="text" placeholder="Name" name="name" required>
@@ -325,8 +319,22 @@
           <button type="submit" class="button btn-submit">Send Message</button>
         </div>
       </form>
+
+      <script>
+        document.getElementById("contact-form").addEventListener("submit", function(e) {
+          e.preventDefault();
+          var name = this.name.value;
+          var email = this.email.value;
+          var message = this.message.value;
+          var subject = "Pesan dari " + name + " - Portfolio";
+          var body = "Nama: " + name + "\nEmail: " + email + "\n\nPesan:\n" + message;
+          window.location.href = "mailto:ranggahalla3@gmail.com?subject="
+            + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+        });
+      </script>
     </div>
     <div class="contact-right">
+      <!-- ... isi contact-right kamu (Address, Phone, Email) tetap sama, jangan dihapus ... -->
 <!-- Konten Kontak Lainnya -->  
  <div class="contact-item">  
   <div class="contact-item-icon">  
